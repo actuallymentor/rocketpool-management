@@ -4,5 +4,5 @@ while true
 do
 	zsh ./refund.sh
 	zsh ./notifier.sh
-	sleep $CRONINTERVAL
+	sleep $DAEMONINTERVAL
 done
