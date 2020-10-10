@@ -4,6 +4,8 @@ source ./notifyIf16EthAvailable.source.zsh
 source ./rplogger.source.zsh
 
 rplogger "[cron] start"
+logger -t rocketcron "start cron, logging to $ROCKETCRONLOG, last entry: $( tail -n 1 $ROCKETCRONLOG )"
+
 # Refund if available
 refund | logger -t rocketcron
 
@@ -11,3 +13,5 @@ refund | logger -t rocketcron
 notifyIf16EthAvailable | logger -t rocketcron
 
 rplogger "[cron] done"
+
+logger -t rocketcron "done"
