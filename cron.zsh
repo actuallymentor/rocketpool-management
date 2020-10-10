@@ -1,5 +1,5 @@
 source ./.env
-source ./refund.souce.zsh
+source ./refund.source.zsh
 source ./notifyIf16EthAvailable.source.zsh
 source ./logger.source.zsh
 
