@@ -31,9 +31,3 @@ function rpstatus() {
 	rocketpool node status | grep balance
 
 }
-
-# while true
-# do
-# 	rpstatus
-# 	sleep 3600
-# done
