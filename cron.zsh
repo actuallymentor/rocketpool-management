@@ -1,13 +1,13 @@
 source ./.env
 source ./refund.source.zsh
 source ./notifyIf16EthAvailable.source.zsh
-source ./logger.source.zsh
+source ./rplogger.source.zsh
 
-logger "[cron] start"
+rplogger "[cron] start"
 # Refund if available
-refund
+refund | logger "[rocketcron] "
 
 # notify if 16 eth after refund
-notifyIf16EthAvailable
+notifyIf16EthAvailable | logger "[rocketcron] "
 
-logger "[cron] done"
+rplogger "[cron] done"
