@@ -5,9 +5,9 @@ source ./rplogger.source.zsh
 
 rplogger "[cron] start"
 # Refund if available
-refund | logger "[rocketcron] "
+refund | logger -t rocketcron
 
 # notify if 16 eth after refund
-notifyIf16EthAvailable | logger "[rocketcron] "
+notifyIf16EthAvailable | logger -t rocketcron
 
 rplogger "[cron] done"
