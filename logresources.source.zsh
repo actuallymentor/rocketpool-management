@@ -15,12 +15,12 @@ function logresources() {
 	# Send the status to the logs and push notification
 	if (( memutil < $RAMWARNINGPERCENT )); then
 		rplogger "[RAM] $memutil % of $(( $memtotal / 1024 / 1024 ))GB"
-		notify "Resource Warning" "RAM usage $memutil"
+		notify "Resource Warning" "RAM usage $memutil percent"
 	fi
 
 	if (( $SWAPWARNINGPERCENT < 50 )); then
 		rplogger "[SWAP] $swaputil % of $(( $swaputil / 1024 / 1024 ))GB"
-		notify "Resource Warning" "SWAP usage $swaputil"
+		notify "Resource Warning" "SWAP usage $swaputil percent"
 	fi
 
 }
