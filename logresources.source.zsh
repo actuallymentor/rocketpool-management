@@ -22,15 +22,16 @@ function logresources() {
 	# Pretty representation
 	memlog="$memutil% RAM util ($memfree/$memtotal), $swaputil% ($swapfree/$swaptotal) SWAP util"
 
-	# Default log
+	# Default log the resources
 	echo "Log resources to log"
-	
 	rplogger "[info] $memlog"
 
 	# Send the status to the logs and push notification
 	echo "Resource emergency logging"
 	if (( $memutil > $RAMWARNINGPERCENT || $swaputil > $SWAPWARNINGPERCENT )); then
-		rplogger $memlog
+
+		# Log with warning tag for easy grepping
+		rplogger "[warning] $memlog"
 		notify "Rocketpool" $memlog
 	fi
 
