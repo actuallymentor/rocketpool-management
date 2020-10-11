@@ -12,6 +12,9 @@ function logresources() {
 	swapfree=$( grep SwapFree /proc/meminfo | grep -Po "[0-9]+" )
 	swaputil=$(( $swapfree * 100 / $swaptotal ))
 
+	# Default log
+	rplogger "[info] $memutil % / $memtotal KiB RAM, $swaputil % / $swaptotal KiB SWAP"
+
 	# Send the status to the logs and push notification
 	if (( memutil < $RAMWARNINGPERCENT )); then
 		rplogger "[RAM] $memutil % of $(( $memtotal / 1024 / 1024 ))GB"
