@@ -20,11 +20,12 @@ function logresources() {
 	swaputil=$(( 100 - $swapfreepercent ))
 
 	# Pretty representation
-	memlog="$memutil% RAM util ($memfree/$memtotal), $swaputil% ($swapfree/$swaptotal) SWAP util"
+	memlog="$memutil% RAM | $swaputil% SWAP"
+	memtable="$memutil% RAM | $swaputil% SWAP | $memfree/$memtotal KiB RAM | $swapfree/$swaptotal KiB SWAP"
 
 	# Default log the resources
 	echo "Log resources to log"
-	rplogger "[info] $memlog"
+	rplogger "[info] $memtable"
 
 	# Send the status to the logs and push notification
 	echo "Resource emergency logging"
