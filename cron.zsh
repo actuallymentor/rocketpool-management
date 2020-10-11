@@ -7,6 +7,7 @@ source ./notifyIf16EthAvailable.source.zsh
 source ./rplogger.source.zsh
 source ./logresources.source.zsh
 
+echo "Cron started"
 
 logresources
 rplogger "[cron] start"
@@ -23,3 +24,5 @@ logresources
 rplogger "[cron] done"
 
 logger -t rocketcron "done"
+
+echo "Cron done"
