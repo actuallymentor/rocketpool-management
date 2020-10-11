@@ -20,7 +20,7 @@ function logresources() {
 	swaputil=$(( 100 - $swapfreepercent ))
 
 	# Pretty representation
-	memlog="$memutil% RAM | $swaputil% SWAP"
+	memlog="$memutil% RAM / $swaputil% SWAP"
 	memtable="$memutil% RAM | $swaputil% SWAP | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
