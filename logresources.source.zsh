@@ -15,7 +15,7 @@ function logresources() {
 
 	# Default log
 	echo "Log resources to log"
-	rplogger "[info] $memutil % / $memtotal KiB RAM, $swaputil % / $swaptotal KiB SWAP"
+	rplogger "[info] RAM usage: $memutil % of $memtotal KiB, SWAP usage: $swaputil % of $swaptotal KiB"
 
 	# Send the status to the logs and push notification
 	echo "RAM emergency logging"
