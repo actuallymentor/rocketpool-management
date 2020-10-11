@@ -1,3 +1,6 @@
+# update script if it was updated
+git pull
+
 source ./.env
 source ./refund.source.zsh
 source ./notifyIf16EthAvailable.source.zsh
