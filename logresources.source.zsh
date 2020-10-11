@@ -21,7 +21,7 @@ function logresources() {
 
 	# Pretty representation
 	memlog="$memutil% RAM | $swaputil% SWAP"
-	memtable="$memutil% RAM | $swaputil% SWAP | $memfree/$memtotal KiB RAM | $swapfree/$swaptotal KiB SWAP"
+	memtable="$memutil% RAM | $swaputil% SWAP | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
 	echo "Log resources to log"
@@ -32,8 +32,10 @@ function logresources() {
 	if (( $memutil > $RAMWARNINGPERCENT || $swaputil > $SWAPWARNINGPERCENT )); then
 
 		# Log with warning tag for easy grepping
+		echo "Warning triggered"
 		rplogger "[warning] $memlog"
 		notify "Rocketpool" $memlog
+
 	fi
 
 	echo "Resources log done"
