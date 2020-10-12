@@ -23,8 +23,11 @@ function logresources() {
 	export PATH=~/bin/:$PATH
 	echo "Getting node stats"
 	rpstatus=$( rocketpool node status )
+	minipoolstatus=$( rocketpool minipool status )
 	minipools=$( echo $rpstatus | grep -Po "\d+(?=(\ minipool))" )
 	staking=$( echo $rpstatus | grep -Po "\d+(?=(\ staking))" )
+	activevalidators=$( echo $minipoolstatus | grep -Po "Validator active:( )* yes" | wc -l )
+	unseenvalidators=$( echo $minipoolstatus | grep -Po "Validator seen:( )* no" | wc -l )
 	echo "Node data: $rpstatus"
 
 	# Memory ( all in KiB )
@@ -51,7 +54,7 @@ function logresources() {
 	echo "Formulating messages"
 	reslog="$memutil%25 RAM | $swaputil%25 SWAP | $cpuutil%25 CPU"
 	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $staking staking | $(( $memtaken /1024 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /1024 ))/$(( $swaptotal/1024 )) MiB SWAP"
-	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking"
+	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators"
 
 	# Default log the resources
 	echo "Log resources to log"
