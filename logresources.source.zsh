@@ -20,6 +20,7 @@ function logcpu() {
 function logresources() {
 
 	# RP Stats
+	export PATH=~/bin/:$PATH
 	echo "Getting node stats"
 	rpstatus=$( rocketpool node status )
 	minipools=$( echo $rpstatus | grep -Po "\d+(?=(\ minipool))" )
