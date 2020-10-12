@@ -51,7 +51,7 @@ function logresources() {
 	echo "Formulating messages"
 	reslog="$memutil%25 RAM | $swaputil%25 SWAP | $cpuutil%25 CPU"
 	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $staking staking | $(( $memtaken /1024 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /1024 ))/$(( $swaptotal/1024 )) MiB SWAP"
-	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,staking"
+	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking"
 
 	# Default log the resources
 	echo "Log resources to log"
