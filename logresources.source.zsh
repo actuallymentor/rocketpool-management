@@ -48,7 +48,7 @@ function logresources() {
 	# Pretty representation
 	echo "Formulating messages"
 	reslog="$memutil/100 RAM | $swaputil/100 SWAP | $cpuutil/100 CPU"
-	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $(( $memtaken /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
+	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $(( $memtaken /1024 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /1024 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
 	echo "Log resources to log"
