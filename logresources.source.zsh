@@ -4,9 +4,6 @@ source ./notify.source.zsh
 function logcpu() {
 	idlecounter=0
 
-	export CPUSAMPLESPERMEASUREMENT=20
-export CPUSAMPLEDELAYINSECONDS=.5
-
 	for ((i = 0; i < $CPUSAMPLESPERMEASUREMENT; i++)); do
 		currentidle=$( top -bn1 | grep -Po "[0-9.]*(?=( id,))" )
 		((idlecounter += $currentidle))
@@ -23,7 +20,11 @@ export CPUSAMPLEDELAYINSECONDS=.5
 function logresources() {
 
 	# RP Stats
-	minipools=$( rocketpool node status | grep -Po "\d+(?=(\ minipool))" )
+	echo "Getting node stats"
+	rpstatus=$( rocketpool node status )
+	minipools=$( echo $rpstatus | grep -Po "\d+(?=(\ minipool))" )
+	echo "Node data: $rpstatus"
+	rplogger "[debug] $rpstatus"
 
 	# Memory ( all in KiB )
 	echo "Getting memory stats"
