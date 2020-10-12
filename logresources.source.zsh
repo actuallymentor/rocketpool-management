@@ -4,9 +4,10 @@ source ./notify.source.zsh
 
 function logresources() {
 
-	# All in KiB
+	# RP Stats
+	minipools=$( rocketpool node status | grep -Po "\d+(?=(\ minipool))" )
 
-	# Memory
+	# Memory ( all in KiB )
 	echo "Getting memory stats"
 	memtotal=$( grep MemTotal /proc/meminfo | grep -Po "[0-9]+" )
 	memfree=$( grep MemFree /proc/meminfo | grep -Po "[0-9]+" )
@@ -21,7 +22,7 @@ function logresources() {
 
 	# Pretty representation
 	memlog="$memutil/100 RAM | $swaputil/100 SWAP"
-	memtable="$memutil% RAM | $swaputil% SWAP | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
+	memtable="$memutil% RAM | $swaputil% SWAP | $minipools minipools | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
 	echo "Log resources to log"
