@@ -12,7 +12,7 @@ function logcpu() {
 
 	cpuutil=$( echo "$(( $idlecounter / $CPUSAMPLESPERMEASUREMENT ))" | grep -Po "\d+(?=\.)" | awk '{print 100 - $1"%"}' )
 
-	echo $
+	echo $cpuutil
 
 }
 
@@ -39,7 +39,7 @@ function logresources() {
 	cpuutil=$( logcpu )
 
 	# Pretty representation
-	reslog="$memutil/100 RAM | $swaputil/100 SWAP | $cpuutil CPU"
+	reslog="$memutil/100 RAM | $swaputil/100 SWAP | $cpuutil/100 CPU"
 	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil CPU | $minipools minipools | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
