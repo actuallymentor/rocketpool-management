@@ -26,8 +26,6 @@ function logresources() {
 	minipools=$( echo $rpstatus | grep -Po "\d+(?=(\ minipool))" )
 	staking=$( echo $rpstatus | grep -Po "\d+(?=(\ staking))" )
 	echo "Node data: $rpstatus"
-	rplogger "[debug] rocketpool path: $( which rocketpool ), full PATH: $PATH"
-	rplogger "[debug] rp status $rpstatus"
 
 	# Memory ( all in KiB )
 	echo "Getting memory stats"
