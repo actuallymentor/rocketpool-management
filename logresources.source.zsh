@@ -1,6 +1,21 @@
 source ./rplogger.source.zsh
 source ./notify.source.zsh
 
+function logcpu() {
+	idlecounter=0
+
+	for ((i = 0; i < $CPUSAMPLESPERMEASUREMENT; i++)); do
+		currentidle=$( top -bn1 | grep -Po "[0-9.]*(?=( id,))" )
+		((idlecounter += $currentidle))
+		sleep $CPUSAMPLEDELAYINSECONDS
+	done
+
+	cpuutil=$( echo "$(( $idlecounter / $CPUSAMPLESPERMEASUREMENT ))" | grep -Po "\d+(?=\.)" | awk '{print 100 - $1"%"}' )
+
+	echo $
+
+}
+
 
 function logresources() {
 
@@ -20,13 +35,16 @@ function logresources() {
 	swapfreepercent=$(( $swapfree * 100 / $swaptotal ))
 	swaputil=$(( 100 - $swapfreepercent ))
 
+	# CPU usage
+	cpuutil=$( logcpu )
+
 	# Pretty representation
-	memlog="$memutil/100 RAM | $swaputil/100 SWAP"
-	memtable="$memutil% RAM | $swaputil% SWAP | $minipools minipools | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
+	reslog="$memutil/100 RAM | $swaputil/100 SWAP | $cpuutil CPU"
+	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil CPU | $minipools minipools | $(( $memfree /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swapfree /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
 	echo "Log resources to log"
-	rplogger "[info] $memtable"
+	rplogger "[info] $restable"
 
 	# Send the status to the logs and push notification
 	echo "Resource emergency logging"
@@ -34,8 +52,8 @@ function logresources() {
 
 		# Log with warning tag for easy grepping
 		echo "Warning triggered"
-		rplogger "[warning] $memlog"
-		notify "Rocketpool" $memlog
+		rplogger "[warning] $reslog"
+		notify "Rocketpool" $reslog
 
 	fi
 
