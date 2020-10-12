@@ -20,7 +20,7 @@ logger -t rocketcron "start cron, logging to $ROCKETCRONLOG, last entry: $( tail
 refund | logger -t rocketcron
 
 # notify if 16 eth after refund
-notifyIf16EthAvailable | logger -t rocketcron
+# notifyIf16EthAvailable | logger -t rocketcron
 
 rplogger "[cron] done"
 
