@@ -33,15 +33,18 @@ function logresources() {
 	memutil=$(( 100 - $memfreepercent ))
 
 	# Swap
+	echo "Getting swap stats"
 	swaptotal=$( grep SwapTotal /proc/meminfo | grep -Po "[0-9]+" )
 	swapfree=$( grep SwapFree /proc/meminfo | grep -Po "[0-9]+" )
 	swapfreepercent=$(( $swapfree * 100 / $swaptotal ))
 	swaputil=$(( 100 - $swapfreepercent ))
 
 	# CPU usage
+	echo "Getting CPU stats"
 	cpuutil=$( logcpu )
 
 	# Pretty representation
+	echo "Formulating messages"
 	reslog="$memutil/100 RAM | $swaputil/100 SWAP | $cpuutil/100 CPU"
 	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $(( $memutil /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaputil /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
@@ -54,7 +57,7 @@ function logresources() {
 	if (( $memutil > $RAMWARNINGPERCENT || $swaputil > $SWAPWARNINGPERCENT )); then
 
 		# Log with warning tag for easy grepping
-		echo "Warning triggered"
+		echo "Push and log warning triggered"
 		rplogger "[warning] $reslog"
 		notify "Rocketpool" $reslog
 
