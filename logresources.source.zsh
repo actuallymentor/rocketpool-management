@@ -28,9 +28,9 @@ function logresources() {
 	# Memory ( all in KiB )
 	echo "Getting memory stats"
 	memtotal=$( grep MemTotal /proc/meminfo | grep -Po "[0-9]+" )
-	memfree=$( grep MemFree /proc/meminfo | grep -Po "[0-9]+" )
-	memtaken=$(( $memtotal - $memfree ))
-	memfreepercent=$(( $memfree * 100 / $memtotal ))
+	memavail=$( grep MemAvailable /proc/meminfo | grep -Po "[0-9]+" )
+	memtaken=$(( $memtotal - $memavail ))
+	memfreepercent=$(( $memavail * 100 / $memtotal ))
 	memutil=$(( 100 - $memfreepercent ))
 
 	# Swap
