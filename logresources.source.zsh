@@ -29,6 +29,7 @@ function logresources() {
 	echo "Getting memory stats"
 	memtotal=$( grep MemTotal /proc/meminfo | grep -Po "[0-9]+" )
 	memfree=$( grep MemFree /proc/meminfo | grep -Po "[0-9]+" )
+	memtaken=$(( $memtotal - $memfree ))
 	memfreepercent=$(( $memfree * 100 / $memtotal ))
 	memutil=$(( 100 - $memfreepercent ))
 
@@ -36,6 +37,7 @@ function logresources() {
 	echo "Getting swap stats"
 	swaptotal=$( grep SwapTotal /proc/meminfo | grep -Po "[0-9]+" )
 	swapfree=$( grep SwapFree /proc/meminfo | grep -Po "[0-9]+" )
+	swaptaken=$(( $swaptotal - $swapfree ))
 	swapfreepercent=$(( $swapfree * 100 / $swaptotal ))
 	swaputil=$(( 100 - $swapfreepercent ))
 
@@ -46,7 +48,7 @@ function logresources() {
 	# Pretty representation
 	echo "Formulating messages"
 	reslog="$memutil/100 RAM | $swaputil/100 SWAP | $cpuutil/100 CPU"
-	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $(( $memutil /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaputil /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
+	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $(( $memtaken /2014 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /2014 ))/$(( $swaptotal/1024 )) MiB SWAP"
 
 	# Default log the resources
 	echo "Log resources to log"
