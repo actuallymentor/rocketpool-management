@@ -59,7 +59,7 @@ function logresources() {
 	# Default log the resources
 	echo "Log resources to log"
 	rplogger "[info] $restable"
-	rplogger "[csv] $csv"
+	csvlogger "$csv"
 
 	# Send the status to the logs and push notification
 	echo "Resource emergency logging"
