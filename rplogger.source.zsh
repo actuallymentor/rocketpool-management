@@ -10,11 +10,11 @@ function csvlogger() {
 	# $1 is header, $2 is data
 	if [[ ! -a $ROCKETCSVLOG ]]; then
 		echo -e "$( date ) - CSV does not yet exist, adding header to $ROCKETCSVLOG"
-		echo -e "$( date ) - $1" >> $ROCKETCSVLOG
+		echo -e $1 >> $ROCKETCSVLOG
 	fi
 
 	# Add data to csv log
-	echo -e "$( date ) - $1"
-	echo -e "$( date ) - $2" >> $ROCKETCSVLOG
+	echo -e "$( date ) - adding csv data:  $2"
+	echo -e $2 >> $ROCKETCSVLOG
 
 }
