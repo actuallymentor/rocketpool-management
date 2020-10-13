@@ -1,11 +1,11 @@
 # update script if it was updated
 git pull
 
-source ./.env
-source ./functions/refund.source.zsh
-source ./functions/notifyIf16EthAvailable.source.zsh
-source ./functions/rplogger.source.zsh
-source ./functions/logresources.source.zsh
+source "${0:a:h}/.env"
+source "${0:a:h}/functions/refund.source.zsh"
+source "${0:a:h}/functions/notifyIf16EthAvailable.source.zsh"
+source "${0:a:h}/functions/rplogger.source.zsh"
+source "${0:a:h}/functions/logresources.source.zsh"
 
 echo "Cron started"
 

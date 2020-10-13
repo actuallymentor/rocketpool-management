@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-source ./rplogger.source.zsh
-source ./notify.source.zsh
+source "${0:a:h}/rplogger.source.zsh"
+source "${0:a:h}/notify.source.zsh"
 
 function logcpu() {
 	idlecounter=0
