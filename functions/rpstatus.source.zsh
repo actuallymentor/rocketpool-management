@@ -33,3 +33,8 @@ function rpstatus() {
 	rocketpool node status | grep balance
 
 }
+
+function eth2SyncStatus() {
+	eth2eta=$( rocketpool service logs eth2 | grep -Po -m 1 "(?<=estimated time remaining )[0-9hms]+" )
+	echo "ETH2 ETA: $eth2eta"
+}
