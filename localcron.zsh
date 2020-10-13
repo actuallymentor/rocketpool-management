@@ -1,4 +1,4 @@
 #!/bin/zsh
-source ./.env
+source "${0:a:h}/.env"
 cd $LOCALPATH
-rsync root@$NODEIP:~/.rocketlog "./logs/rocketlog-$(date)"
+rsync root@$NODEIP:~/.rocketlog "{0:a:h}/logs/rocketlog-$(date)"
