@@ -2,10 +2,10 @@
 git pull
 
 source ./.env
-source ./refund.source.zsh
-source ./notifyIf16EthAvailable.source.zsh
-source ./rplogger.source.zsh
-source ./logresources.source.zsh
+source ./functions/refund.source.zsh
+source ./functions/notifyIf16EthAvailable.source.zsh
+source ./functions/rplogger.source.zsh
+source ./functions/logresources.source.zsh
 
 echo "Cron started"
 

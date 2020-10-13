@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 function line() {
 	if [[ -v 1 ]]; then
 		echo -e "\n--------------------"

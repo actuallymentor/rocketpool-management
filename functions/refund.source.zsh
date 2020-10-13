@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 source ./rplogger.source.zsh
 
 function refund() {

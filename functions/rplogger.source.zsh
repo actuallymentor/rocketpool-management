@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 function rplogger() {
 	
 	echo -e "$( date ) - $1"

@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 function notify() {
 
 	echo "Sending $1 $2"
