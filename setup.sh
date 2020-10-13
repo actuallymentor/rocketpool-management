@@ -21,3 +21,6 @@ rocketpool node status
 
 rocketpool node register
 rocketpool node deposit
+
+# Optional if you want to automate minipool creation
+apt install -y expect
