@@ -1,8 +1,6 @@
 # update script if it was updated
 git pull
 
-echo "${0:a:h}"
-
 source "${0:a:h}/.env"
 source "${0:a:h}/functions/refund.source.zsh"
 source "${0:a:h}/functions/notifyIf16EthAvailable.source.zsh"
