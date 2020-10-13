@@ -38,4 +38,3 @@ export NODEIP=1.1.1.1
 - https://prylabs.net/participate 
 - https://faucet.goerli.mudit.blog/ 
 - https://goerli-faucet.slock.it/ 
-- 
