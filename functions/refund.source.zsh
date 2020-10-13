@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 source "${0:a:h}/rplogger.source.zsh"
-echo "${0:a:h}"
 
 function refund() {
 

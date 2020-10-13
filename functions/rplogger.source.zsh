@@ -1,7 +1,8 @@
 #!/bin/zsh
-
+echo "${0:a:h}"
 function rplogger() {
 	
+	echo "${0:a:h}"
 	echo -e "$( date ) - $1"
 	echo -e "$( date ) - $1" >> $ROCKETCRONLOG
 
