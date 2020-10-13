@@ -6,7 +6,7 @@ function make16ethpool() {
 
 	rplogger '[make16ethpool] starting process'
 	
-	expect ./minipool.16.expect
+	expect "${0:a:h}/minipool.16.expect"
 
 	rplogger '[make16ethpool] done with process'
 
