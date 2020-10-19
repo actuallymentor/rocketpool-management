@@ -17,10 +17,14 @@ rplogger "[cron] start"
 logger -t rocketcron "start cron, logging to $ROCKETCRONLOG, last entry: $( tail -n 1 $ROCKETCRONLOG )"
 
 # Refund if available
-refund | logger -t rocketcron
+if [[ -v AUTO_REFUND ]]; then
+	refund | logger -t rocketcron
+fi
 
 # notify if 16 eth after refund
-# notifyIf16EthAvailable | logger -t rocketcron
+if [[ -v NOTIFY_NEW_MINIPOOL ]]; then
+	notifyIf16EthAvailable | logger -t rocketcron
+fi
 
 rplogger "[cron] done"
 
