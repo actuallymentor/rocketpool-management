@@ -5,6 +5,7 @@ These are the functions I use to set up and manage my Rocketpool node.
 ## Features
 
 - A setup script to inspire your own workflow
+    + Not using `zsh` yet? Check out my [vps setup script]( https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty )
 - Send you a push notification if your RAM or CPU is overused
 - Keep a `.csv` log of your resources
 - Automatically withdraw refunds from minipools so you can scale up
