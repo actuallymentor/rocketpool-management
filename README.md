@@ -2,6 +2,11 @@
 
 These are the functions I use to set up and manage my Rocketpool node.
 
+Assumptions:
+
+- You are on Ubuntu 20
+- You're using Geth, Prysm and Teku
+
 ## Features
 
 - A setup script to inspire your own workflow

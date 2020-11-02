@@ -1,12 +1,16 @@
 ####################
 # Security settings
 ####################
+
+# Go Ethereum: https://geth.ethereum.org/docs/interface/private-network#setting-up-networking
 ufw allow 30303:30305/tcp comment 'Go Ethereum'
 ufw allow 30303:30305/udp comment 'Go Ethereum'
-ufw allow 9001/tcp 'Eth2 discovery'
-ufw allow 9001/udp 'Eth2 discovery'
 
-#Prysm: https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites
+# Teku port nu,ber is coincidence https://gist.github.com/Larrypcdotcom/fcd4e79c2cf02ce37ec6ed9797beca2c#ports
+ufw allow 9001/tcp comment 'Roketpool arbitrary default port'
+ufw allow 9001/udp comment 'Roketpool arbitrary default port'
+
+# Prysm: https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites
 ufw allow 13000/tcp comment 'Prysm node'
 ufw allow 13000/udp comment 'Prysm node'
 ufw enable
@@ -19,7 +23,7 @@ ufw enable
 username="rocketman"
 adduser $username
 
-# Denu user SSH access
+# Deny user SSH access
 echo "DenyUsers $username" >> /etc/ssh/sshd_config
 su - $username 
 
