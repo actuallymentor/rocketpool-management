@@ -5,7 +5,7 @@ These are the functions I use to set up and manage my Rocketpool node.
 Assumptions:
 
 - You are on Ubuntu 20
-- You're using Geth, Prysm and Teku
+- You're using Geth and Prysm (relevant for the firewall ports, see `setup.sh`)
 
 ## Features
 
