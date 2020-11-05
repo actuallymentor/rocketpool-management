@@ -67,6 +67,10 @@ function logresources() {
 	csvh='$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion'
 	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion"
 
+	# Echo csv data for debugging
+	echo $csvh
+	echo $csv
+
 	# Default log the resources
 	echo "Log resources to log"
 	rplogger "[info] $restable"
