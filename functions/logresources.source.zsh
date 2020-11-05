@@ -24,12 +24,20 @@ function logresources() {
 	# RP Stats
 	export PATH=~/bin/:$PATH
 	echo "Getting node stats"
+	rpservice=$( rocketpool service version )
 	rpstatus=$( rocketpool node status )
+
+	# Minipool data
 	minipoolstatus=$( rocketpool minipool status )
 	minipools=$( echo $rpstatus | grep -Po "\d+(?=(\ minipool))" )
 	staking=$( echo $rpstatus | grep -Po "\d+(?=(\ staking))" )
 	activevalidators=$( echo $minipoolstatus | grep -Po "Validator active:( )* yes" | wc -l )
 	unseenvalidators=$( echo $minipoolstatus | grep -Po "Validator seen:( )* no" | wc -l )
+
+	# Service data
+	rpclientversion=$( echo $rpservice | grep -Po "(?<=client version: ).*$" )
+	rpserviceversion=$( echo $rpservice | grep -Po "(?<=service version: ).*$" )
+
 	echo "Node data: $rpstatus"
 
 	# Memory ( all in KiB )
@@ -56,8 +64,8 @@ function logresources() {
 	echo "Formulating messages"
 	reslog="$memutil%25 RAM | $swaputil%25 SWAP | $cpuutil%25 CPU"
 	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $staking staking | $activevalidators active | $(( $memtaken /1024 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /1024 ))/$(( $swaptotal/1024 )) MiB SWAP"
-	csvh='$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators'
-	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators"
+	csvh='$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion'
+	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion"
 
 	# Default log the resources
 	echo "Log resources to log"
