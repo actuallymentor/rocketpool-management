@@ -9,9 +9,9 @@ function make16ethpool() {
 	# Since 0.0.7 this is no longer needed
 	# ${0:a:h} is different at run and source, hence the path selector
 	# expect "${0:a:h}/functions/minipool.16.expect"
-	status=$( rocketpool node deposit -a 16 -f 'auto' )
+	depositlog=$( rocketpool node deposit -a 16 -f 'auto' )
 
-	rplogger '[make16ethpool] $status'
+	rplogger '[make16ethpool] $depositlog'
 
 	rplogger '[make16ethpool] done with process'
 
