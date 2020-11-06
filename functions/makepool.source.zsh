@@ -11,7 +11,7 @@ function make16ethpool() {
 	# expect "${0:a:h}/functions/minipool.16.expect"
 	depositlog=$( rocketpool node deposit -a 16 -f 'auto' )
 
-	rplogger '[make16ethpool] $depositlog'
+	rplogger "[make16ethpool] $depositlog"
 
 	rplogger '[make16ethpool] done with process'
 
