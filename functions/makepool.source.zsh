@@ -5,6 +5,8 @@ source "${0:a:h}/rplogger.source.zsh"
 function make16ethpool() {
 
 	rplogger '[make16ethpool] starting process'
+
+	rplogger "[make16ethpool] using binary: $( which rocketpool )"
 	
 	# Since 0.0.7 this is no longer needed
 	# ${0:a:h} is different at run and source, hence the path selector
