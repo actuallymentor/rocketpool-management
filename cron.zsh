@@ -7,6 +7,9 @@ source "${0:a:h}/functions/notifyIf16EthAvailable.source.zsh"
 source "${0:a:h}/functions/rplogger.source.zsh"
 source "${0:a:h}/functions/logresources.source.zsh"
 
+# Add RP to path
+export PATH=~/bin/:$PATH
+
 echo "Cron started"
 
 # Log and notify resources
