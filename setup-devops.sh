@@ -27,11 +27,11 @@ ufw enable
 # Create new user
 username="rocketman"
 adduser $username
+usermod -aG sudo $username
+chsh $username -s `which zsh`
 
 # Deny user SSH access
 echo "DenyUsers $username" >> /etc/ssh/sshd_config
-
-echo "Now set up rocketman: https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty.git"
 
 # Log in as rocketman
 su - $username 
