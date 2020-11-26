@@ -30,4 +30,10 @@ adduser $username
 
 # Deny user SSH access
 echo "DenyUsers $username" >> /etc/ssh/sshd_config
+
+# Set zsh params for rocketman
+chsh $username -s $( which zsh )
+cp ~/.zshrc "/home/$username/"
+
+# Log in as rocketman
 su - $username 
