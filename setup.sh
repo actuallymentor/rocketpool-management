@@ -1,3 +1,6 @@
+echo -e "Did you set up your basic VPS config?\nIf not, this is good inspiration: https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty"
+read -p "Press any key to continue rocketpool setup"
+
 ####################
 # Security settings
 ####################
@@ -6,13 +9,18 @@
 ufw allow 30303:30305/tcp comment 'Go Ethereum'
 ufw allow 30303:30305/udp comment 'Go Ethereum'
 
-# Teku port nu,ber is coincidence https://gist.github.com/Larrypcdotcom/fcd4e79c2cf02ce37ec6ed9797beca2c#ports
+# Teku port number is coincidence https://gist.github.com/Larrypcdotcom/fcd4e79c2cf02ce37ec6ed9797beca2c#ports
 ufw allow 9001/tcp comment 'Roketpool arbitrary default port'
 ufw allow 9001/udp comment 'Roketpool arbitrary default port'
 
 # Prysm: https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites
 ufw allow 13000/tcp comment 'Prysm node'
 ufw allow 13000/udp comment 'Prysm node'
+
+# Lighthouse: https://lighthouse-book.sigmaprime.io/advanced_networking.html
+ufw allow 9000/tcp comment 'Lighthouse node'
+ufw allow 9000/udp comment 'Lighthouse node'
+
 ufw enable
 
 ################
@@ -45,12 +53,13 @@ rocketpool service config
 #########################
 # Beta-specific configs
 #########################
-# Run prysm in efficient mode
-sed -i 's/binary/binary --blst --p2p-max-peers 75/g' ~/.rocketpool/chains/eth2/start-beacon.sh
-sed -i 's/binary/binary --blst /g' ~/.rocketpool/chains/eth2/start-validator.sh
+# Run prysm in efficient mode, no longer needed, leaving for reference
+# sed -i 's/binary/binary --blst --p2p-max-peers 75/g' ~/.rocketpool/chains/eth2/start-beacon.sh
+# sed -i 's/binary/binary --blst /g' ~/.rocketpool/chains/eth2/start-validator.sh
 
 # Set graffiti for guildwarz
-sed -i 's/--graffiti "$GRAFFITI"/--graffiti "guildwarz-rocket-pool"/g' ~/.rocketpool/chains/eth2/start-validator.sh
+# Note: this ended, leaving it here for reference
+# sed -i 's/--graffiti "$GRAFFITI"/--graffiti "guildwarz-rocket-pool"/g' ~/.rocketpool/chains/eth2/start-validator.sh
 
 #################
 # Initial start
