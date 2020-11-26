@@ -31,9 +31,7 @@ adduser $username
 # Deny user SSH access
 echo "DenyUsers $username" >> /etc/ssh/sshd_config
 
-# Set zsh params for rocketman
-chsh $username -s $( which zsh )
-cp ~/.zshrc "/home/$username/"
+echo "Now set up rocketman: https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty.git"
 
 # Log in as rocketman
 su - $username 
