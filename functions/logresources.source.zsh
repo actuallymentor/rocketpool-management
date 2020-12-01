@@ -78,7 +78,7 @@ function logresources() {
 
 	# Send the status to the logs and push notification
 	echo "Resource emergency logging"
-	if (( $memutil > $RAMWARNINGPERCENT || $swaputil > $SWAPWARNINGPERCENT )); then
+	if (( $memutil > $RAMWARNINGPERCENT || $swaputil > $SWAPWARNINGPERCENT || $cpuutil > $CPUWARNINGPERCENT )); then
 
 		# Log with warning tag for easy grepping
 		echo "Push and log warning triggered"
