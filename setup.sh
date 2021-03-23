@@ -13,6 +13,7 @@ fi
 
 ####################
 # Security settings
+# deprecation notice: the rocketpool stack standardises the eth2 port to 9001. The eth2-specific firewall rules are superfluous
 ####################
 
 # Go Ethereum: https://geth.ethereum.org/docs/interface/private-network#setting-up-networking
@@ -23,14 +24,15 @@ sudo ufw allow 30303:30305/udp comment 'Go Ethereum'
 sudo ufw allow 9001/tcp comment 'Roketpool arbitrary default port'
 sudo ufw allow 9001/udp comment 'Roketpool arbitrary default port'
 
-# Prysm: https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites
-sudo ufw allow 13000/tcp comment 'Prysm node'
-sudo ufw allow 13000/udp comment 'Prysm node'
+# # Prysm: https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites
+# sudo ufw allow 13000/tcp comment 'Prysm node'
+# sudo ufw allow 13000/udp comment 'Prysm node'
 
-# Lighthouse: https://lighthouse-book.sigmaprime.io/advanced_networking.html
-# Nimbus: https://nimbus.guide/health.html#set-up-port-forwarding
-sudo ufw allow 9000/tcp comment 'Lighthouse node'
-sudo ufw allow 9000/udp comment 'Lighthouse node'
+# # Lighthouse: https://lighthouse-book.sigmaprime.io/advanced_networking.html
+# # Teku: https://docs.teku.consensys.net/en/latest/HowTo/Find-and-Connect/Improve-Connectivity/#configuring-ports
+# # Nimbus: https://nimbus.guide/troubleshooting.html?highlight=port#address-already-in-use-error
+# sudo ufw allow 9000/tcp comment 'Lighthouse, teku and nimbus node'
+# sudo ufw allow 9000/udp comment 'Lighthouse, teku and nimbus node'
 
 sudo ufw enable
 
