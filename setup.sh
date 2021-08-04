@@ -1,4 +1,17 @@
 ####################
+# User vars
+####################
+echo "Are you using raspberry pi? [y/N]"
+read RASPBERRY_PI
+RASPBERRY_PI=${RASPBERRY_PI:-n}
+
+if [ "$EXTERNAL_SSD_MOUNT" = "y" ]; then
+	echo "What is the mount path of your ssd? (probably /mnt/something)"
+	read EXTERNAL_SSD_MOUNT
+	EXTERNAL_SSD_MOUNT=${EXTERNAL_SSD_MOUNT:-/mnt/ssd}
+fi
+
+####################
 # Security settings
 ####################
 
@@ -15,6 +28,7 @@ sudo ufw allow 13000/tcp comment 'Prysm node'
 sudo ufw allow 13000/udp comment 'Prysm node'
 
 # Lighthouse: https://lighthouse-book.sigmaprime.io/advanced_networking.html
+# Nimbus: https://nimbus.guide/health.html#set-up-port-forwarding
 sudo ufw allow 9000/tcp comment 'Lighthouse node'
 sudo ufw allow 9000/udp comment 'Lighthouse node'
 
@@ -24,27 +38,32 @@ sudo ufw enable
 # Rocketpool setup
 ###################
 
-cd
-curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 --create-dirs -o ~/bin/rocketpool && chmod +x ~/bin/rocketpool
+# https://docs.rocketpool.net/guides/node/docker.html#downloading-the-rocket-pool-cli
+mkdir -p ~/bin
+
+# Get the relevant executable
+if [ "$RASPBERRY_PI" = "y" ]; then
+	wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
+else
+	wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
+fi
+
+chmod +x ~/bin/rocketpool
 
 echo "export PATH=~/bin/:$PATH" >> ~/.zshrc
 source ~/.zshrc
 
+# If needed for PI, change docker data location
+if [ "$RASPBERRY_PI" = "y" ]; then
+	echo "{ \"data-root\": \"$EXTERNAL_SSD_MOUNT/docker\" }"
+	sudo systemctl restart docker
+fi
+
+# Initialize rocketpool service
 rocketpool service install
 source ~/.zshrc
 
 rocketpool service config
-
-#########################
-# Beta-specific configs
-#########################
-# Run prysm in efficient mode, no longer needed, leaving for reference
-# sed -i 's/binary/binary --blst --p2p-max-peers 75/g' ~/.rocketpool/chains/eth2/start-beacon.sh
-# sed -i 's/binary/binary --blst /g' ~/.rocketpool/chains/eth2/start-validator.sh
-
-# Set graffiti for guildwarz
-# Note: this ended, leaving it here for reference
-# sed -i 's/--graffiti "$GRAFFITI"/--graffiti "guildwarz-rocket-pool"/g' ~/.rocketpool/chains/eth2/start-validator.sh
 
 #################
 # Initial start
@@ -58,10 +77,6 @@ rocketpool service stats
 # User interaction
 rocketpool wallet init
 
-# Faucet doesn't seem to work
-# rocketpool faucet withdraw eth
-# Should be showing balance of 33eth
-# rocketpool node status
-
-rocketpool node register
-rocketpool node deposit
+# Commands to run manually
+# rocketpool node register
+# rocketpool node deposit
