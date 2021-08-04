@@ -70,13 +70,11 @@ rocketpool service config
 # Initial start
 #################
 
-rocketpool service start
+echo -e "\n-----------------"
+echo "Log out and back in"
+echo -e "-----------------\n\n"
 
-# Get some stats to verify we are good
-rocketpool service stats
-
-# User interaction
-rocketpool wallet init
+echo "Then run 'rocketpool service start'and 'rocketpool wallet init'"
 
 # Commands to run manually
 # rocketpool node register
