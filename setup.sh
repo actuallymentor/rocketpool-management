@@ -56,7 +56,7 @@ PATH=~/bin/:$PATH
 
 # If needed for PI, change docker data location
 if [ "$RASPBERRY_PI" = "y" ]; then
-	sudo mkdir -p $EXTERNAL_SSD_MOUNT"/docker"
+	sudo mkdir -p $EXTERNAL_SSD_MOUNT"/docker" || echo "Folder creation failed"
 	echo "{ \"data-root\": \"$EXTERNAL_SSD_MOUNT/docker\" }" | sudo tee -a /etc/docker/daemon.json > /dev/null
 fi
 
