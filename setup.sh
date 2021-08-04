@@ -52,6 +52,7 @@ chmod +x ~/bin/rocketpool
 
 echo "export PATH=~/bin/:$PATH" >> ~/.zshrc
 source ~/.zshrc
+PATH=~/bin/:$PATH
 
 # If needed for PI, change docker data location
 if [ "$RASPBERRY_PI" = "y" ]; then
