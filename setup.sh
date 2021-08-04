@@ -43,9 +43,9 @@ mkdir -p ~/bin
 
 # Get the relevant executable
 if [ "$RASPBERRY_PI" = "y" ]; then
-	wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
-else
 	wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
+else
+	wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
 fi
 
 chmod +x ~/bin/rocketpool
@@ -55,8 +55,8 @@ source ~/.zshrc
 
 # If needed for PI, change docker data location
 if [ "$RASPBERRY_PI" = "y" ]; then
-	echo "{ \"data-root\": \"$EXTERNAL_SSD_MOUNT/docker\" }"
-	sudo systemctl restart docker
+	sudo mkdir -p $EXTERNAL_SSD_MOUNT"/docker"
+	echo "{ \"data-root\": \"$EXTERNAL_SSD_MOUNT/docker\" }" | sudo tee -a /etc/docker/daemon.json > /dev/null
 fi
 
 # Initialize rocketpool service
