@@ -5,7 +5,7 @@ echo "Are you using raspberry pi? [y/N]"
 read RASPBERRY_PI
 RASPBERRY_PI=${RASPBERRY_PI:-n}
 
-if [ "$EXTERNAL_SSD_MOUNT" = "y" ]; then
+if [ "$RASPBERRY_PI" = "y" ]; then
 	echo "What is the mount path of your ssd? (probably /mnt/something)"
 	read EXTERNAL_SSD_MOUNT
 	EXTERNAL_SSD_MOUNT=${EXTERNAL_SSD_MOUNT:-/mnt/ssd}
