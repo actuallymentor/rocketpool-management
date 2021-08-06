@@ -23,7 +23,7 @@ function logtemp() {
 		millidegrees=$( cat /sys/class/thermal/thermal_zone*/temp || 0 )
 		degrees=$(( millidegrees / 1000 ))
 		echo $degrees
-	elif
+	else
 		echo 0
 	fi
 }
