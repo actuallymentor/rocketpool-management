@@ -19,7 +19,7 @@ function logcpu() {
 }
 
 function logtemp() {
-	if which sensors; then
+	if which sensors 1>/dev/null; then
 		millidegrees=$( cat /sys/class/thermal/thermal_zone*/temp || 0 )
 		degrees=$(( millidegrees / 1000 ))
 		echo $degrees
