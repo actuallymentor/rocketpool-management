@@ -99,7 +99,7 @@ function logresources() {
 	fi
 
 	# Temperature warning
-	if(( $cputemp > $TEMPWARNING )); then
+	if (( $cputemp > $TEMPWARNING )); then
 
 		# Log with warning tag for easy grepping
 		echo "Push and log warning triggered"
