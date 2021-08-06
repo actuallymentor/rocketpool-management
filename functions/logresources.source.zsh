@@ -18,6 +18,16 @@ function logcpu() {
 
 }
 
+function logtemp() {
+	if which sensors; then
+		millidegrees=$( cat /sys/class/thermal/thermal_zone*/temp || 0 )
+		degrees=$(( millidegrees / 1000 ))
+		echo $degrees
+	elif
+		echo 0
+	fi
+}
+
 
 function logresources() {
 
@@ -59,13 +69,14 @@ function logresources() {
 	# CPU usage
 	echo "Getting CPU stats"
 	cpuutil=$( logcpu )
+	cputemp=$( logtemp )
 
 	# Pretty representation
 	echo "Formulating messages"
 	reslog="$memutil%25 RAM | $swaputil%25 SWAP | $cpuutil%25 CPU"
-	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $minipools minipools | $staking staking | $activevalidators active | $(( $memtaken /1024 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /1024 ))/$(( $swaptotal/1024 )) MiB SWAP"
-	csvh='$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion'
-	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion"
+	restable="$memutil% RAM | $swaputil% SWAP | $cpuutil% CPU | $cputemp C | $minipools minipools | $staking staking | $activevalidators active | $(( $memtaken /1024 ))/$(( $memtotal/1024 )) MiB RAM | $(( $swaptaken /1024 ))/$(( $swaptotal/1024 )) MiB SWAP"
+	csvh='$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$cputemp,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion'
+	csv="$(date),$memutil,$memtaken,$memtotal,$swaputil,$swaptaken,$swaptotal,$cpuutil,$cputemp,$minipools,$staking,$activevalidators,$unseenvalidators,$rpclientversion,$rpserviceversion"
 
 	# Echo csv data for debugging
 	echo $csvh
